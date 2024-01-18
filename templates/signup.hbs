@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="signup.css" type="text/css">
+    <script>
+        function validateForm() {
+            console.log("valform");
+            var nameInput = document.forms["signupForm"]["name"].value;
+            var passwordInput = document.forms["signupForm"]["password"].value;
+            if (nameInput === "" || passwordInput === "") {
+                alert("Name and Password cannot be empty");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <form action="/signup" method="post" name="signupForm" onsubmit="return validateForm()">
+    <h2>Signup</h2>
+
+    <input type="text" name="name" placeholder="Name">
+    <input type="password" name="password" placeholder="Password">
+    <button class="register-button" type="submit">register</button>
+    {{#if error}}
+    <p class="error">{{error}}</p>
+    {{/if}}
+
+    </form>
+
+</body>
+</html>

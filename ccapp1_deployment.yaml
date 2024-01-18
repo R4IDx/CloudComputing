@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    cctodoapp.service: ccapp1
+  name: ccapp1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      cctodoapp.service: ccapp1
+  template:
+    metadata:
+      labels:
+        cctodoapp.network/cloudcomputing-schellhorn-steiner-ccnetwork: "true"
+        cctodoapp.service: ccapp1
+    spec:
+      containers:
+        - env:
+            - name: MONGO_PASS
+              value: root
+            - name: MONGO_USER
+              value: root
+          image: weekai/my-repo:ccapp1
+          imagePullPolicy: Always
+          name: ccapp1
+          ports:
+            - containerPort: 3000
+      restartPolicy: Always
+
+

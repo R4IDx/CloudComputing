@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: cloudcomputing-schellhorn-steiner-ccnetwork
+spec:
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              cctodoapp.network/cloudcomputing-schellhorn-steiner-ccnetwork: "true"
+  podSelector:
+    matchLabels:
+      cctodoapp.network/cloudcomputing-schellhorn-steiner-ccnetwork: "true"

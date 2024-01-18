@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>TODO List</title>
+    <link rel="stylesheet" href="todo.css" type="text/css">
+    <script>
+      function validateForm() {
+        var todoInput = document.forms["todoForm"]["todo"].value;
+        if (todoInput === "") {
+          alert("Todo cannot be empty");
+          return false;
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <h1>TODO List</h1>
+    <form action="/logout" method="POST">
+      <button class="logout-button" type="submit">Logout</button>
+    </form>
+    <form method="POST" action="/todo" name="todoForm" onsubmit="return validateForm()">
+      <input type="text" name="todo" placeholder="Add new Todo" />
+      <button class="add-button" type="submit">Add</button>
+    </form>
+
+    <ul>
+      {{#each todos}}
+      <li class="todo-item {{#if this.isDone}}completed{{/if}}">
+        <div class="todo-description">{{this.description}}</div>
+        <div class="todo-actions">
+          <form class="completed-form" action="/todo/{{this._id}}?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <button type="submit" class="complete-button {{#if this.isDone}}is-done{{/if}}">
+              {{#if this.isDone}}Done{{else}}Not completed{{/if}}
+            </button>
+          </form>
+          <form class="delete-form" action="/todo/{{this._id}}?_method=DELETE" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button class="delete-button" type="submit">delete</button>
+          </form>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    cctodoapp.service: mongodb
+  name: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      cctodoapp.service: mongodb
+  serviceName: mongodb
+  template:
+    metadata:
+      labels:
+        cctodoapp.network/cloudcomputing-kuhl-schwarz-ccnetwork: "true"
+        cctodoapp.service: mongodb
+    spec:
+      containers:
+        - env:
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: root
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+          image: mongo:4.4
+          name: mongodb
+          ports:
+            - containerPort: 27017
+      restartPolicy: Always
