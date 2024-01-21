@@ -1,10 +1,6 @@
-ToDo App with Login 
+# ToDo App with Login 
 
-Used:
--MongoDB
--Docker
--Nginx
--Helm + Kubernetes
+MongoDB/Docker/Nginx/Helm/Kubernetes
 
 
 
